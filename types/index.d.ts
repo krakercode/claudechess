@@ -18,12 +18,16 @@ export type PuzzleProgress = {
 
 export type PuzzleStats = { solved: number; streak: number }
 
+/** Which puzzles are dealt: one level, or all of them from easiest to hardest. */
+export type LevelChoice = 'mixed' | 'easy' | 'medium' | 'hard'
+
 declare module 'claude-code' {
   interface PluginState {
     'chess-puzzles': {
       progress: PuzzleProgress | null
       stats: PuzzleStats
       isWorking: boolean
+      level: LevelChoice
     }
   }
 }
