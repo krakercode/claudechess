@@ -1,0 +1,9 @@
+{
+  "name": "chess-puzzles",
+  "version": "0.1.0",
+  "description": "A pane of chess puzzles to solve while Claude is working",
+  "author": {
+    "name": "krakercode"
+  },
+  "types": "./types/index.d.ts"
+}
