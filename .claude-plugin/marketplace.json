@@ -1,0 +1,13 @@
+{
+  "name": "claudechess",
+  "description": "Chess puzzles to solve while Claude works",
+  "owner": {
+    "name": "krakercode"
+  },
+  "plugins": [
+    {
+      "name": "chess-puzzles",
+      "source": "./"
+    }
+  ]
+}
