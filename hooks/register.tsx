@@ -1,7 +1,7 @@
 import { atom, read, update } from 'claude-code'
 import type { EngineInterface, Register } from 'claude-code'
 
-import type { PuzzleProgress, PuzzleStats } from '../types'
+import type { LevelChoice, PuzzleProgress, PuzzleStats } from '../types'
 import { applyUci, colorOf, isSameMove, parseFen, pieceName, squareIndex, squareName, toFen } from './chess.ts'
 import { PUZZLES } from './puzzles.ts'
 
@@ -11,18 +11,33 @@ const TITLE = 'Chess puzzle'
 const progress = atom({ plugin: 'chess-puzzles', key: 'progress' } as const, null)
 const stats = atom({ plugin: 'chess-puzzles', key: 'stats' } as const, { solved: 0, streak: 0 })
 const isWorking = atom({ plugin: 'chess-puzzles', key: 'isWorking' } as const, false)
+const level = atom({ plugin: 'chess-puzzles', key: 'level' } as const, 'mixed')
 
 // $.store keys: kept across sessions.
 const NEXT_KEY = 'next'
 const STATS_KEY = 'stats'
 const AUTO_OPEN_KEY = 'autoOpen'
+const LEVEL_KEY = 'level'
+
+const LEVELS: LevelChoice[] = ['mixed', 'easy', 'medium', 'hard']
+const LEVEL_NAMES: Record<LevelChoice, string> = { mixed: 'Mixed', easy: 'Easy', medium: 'Medium', hard: 'Hard' }
+const isLevelChoice = (value: unknown): value is LevelChoice => LEVELS.includes(value as LevelChoice)
 
 const sideName = (fen: string) => (parseFen(fen).turn === 'w' ? 'White' : 'Black')
 
+/** The first puzzle at the level from index on, wrapping around the set. */
+const firstAt = (index: number, choice: LevelChoice): number => {
+  for (let step = 0; step < PUZZLES.length; step++) {
+    const at = (index + step) % PUZZLES.length
+    if (choice === 'mixed' || PUZZLES[at]!.level === choice) return at
+  }
+  return index % PUZZLES.length
+}
+
 const fresh = (index: number): PuzzleProgress => {
-  const puzzle = PUZZLES[index % PUZZLES.length]!
+  const puzzle = PUZZLES[index]!
   return {
-    index: index % PUZZLES.length,
+    index,
     ply: 0,
     fen: puzzle.fen,
     selected: null,
@@ -34,23 +49,37 @@ const fresh = (index: number): PuzzleProgress => {
 
 /** The puzzle on the board, or the one that would be dealt; writes nothing, so a drawing may call it. */
 const peek = async ($: EngineInterface): Promise<PuzzleProgress> =>
-  (await read($, progress)) ?? fresh(Number((await $.store.get(NEXT_KEY)) ?? 0))
+  (await read($, progress)) ?? fresh(firstAt(Number((await $.store.get(NEXT_KEY)) ?? 0), await read($, level)))
 
 /** The puzzle on the board, dealing the next one from the store if none is. */
 const current = async ($: EngineInterface): Promise<PuzzleProgress> => {
   const now = await read($, progress)
   if (now) return now
-  const next = Number((await $.store.get(NEXT_KEY)) ?? 0)
+  const next = firstAt(Number((await $.store.get(NEXT_KEY)) ?? 0), await read($, level))
   const dealt = fresh(next)
   await update($, progress, value => value ?? dealt)
   return (await read($, progress)) ?? dealt
 }
 
-const nextPuzzle = async ($: EngineInterface) => {
-  const now = await current($)
-  const index = (now.index + 1) % PUZZLES.length
+const deal = async ($: EngineInterface, from: number) => {
+  const index = firstAt(from, await read($, level))
   await $.store.set(NEXT_KEY, index)
   await update($, progress, () => fresh(index))
+}
+
+const nextPuzzle = async ($: EngineInterface) => deal($, (await current($)).index + 1)
+
+/** Switches the level and deals a puzzle at it, unless the one on the board already is. */
+const setLevel = async ($: EngineInterface, choice: LevelChoice) => {
+  await update($, level, () => choice)
+  await $.store.set(LEVEL_KEY, choice)
+  const now = await current($)
+  if (choice !== 'mixed' && PUZZLES[now.index]!.level !== choice) await deal($, now.index)
+}
+
+const cycleLevel = async ($: EngineInterface) => {
+  const now = await read($, level)
+  await setLevel($, LEVELS[(LEVELS.indexOf(now) + 1) % LEVELS.length]!)
 }
 
 const recordSolve = async ($: EngineInterface, isClean: boolean) => {
@@ -146,11 +175,14 @@ export const register: Register = on => {
   on('session.start', async ($, e, next) => {
     await $.command.register({
       name: 'chess',
-      description: 'Open the chess puzzle pane; "/chess off" stops it opening while Claude works, "/chess on" turns that back on',
-      argumentHint: '[on|off|next]',
+      description:
+        'Open the chess puzzle pane; "/chess easy", "medium", "hard" or "mixed" picks the level; "/chess off" stops it opening while Claude works, "/chess on" turns that back on',
+      argumentHint: '[easy|medium|hard|mixed|next|on|off]',
     })
     const saved = (await $.store.get(STATS_KEY)) as PuzzleStats | undefined
     if (saved) await update($, stats, () => saved)
+    const savedLevel = await $.store.get(LEVEL_KEY)
+    if (isLevelChoice(savedLevel)) await update($, level, () => savedLevel)
     await current($)
 
     return next(e)
@@ -167,6 +199,7 @@ export const register: Register = on => {
       return { text: 'The chess pane will open whenever Claude starts working.' }
     }
     if (arg === 'next') await nextPuzzle($)
+    if (isLevelChoice(arg)) await setLevel($, arg)
     await current($)
     const opened = await openPane($)
 
@@ -198,6 +231,7 @@ export const register: Register = on => {
     const now = await peek($)
     const score = await read($, stats)
     const working = await read($, isWorking)
+    const choice = await read($, level)
     const puzzle = PUZZLES[now.index]!
     const position = parseFen(now.fen)
     // The board faces the side the person plays: the side to move at the start.
@@ -229,8 +263,9 @@ export const register: Register = on => {
         </Text>
         <Text>
           <Text bold>#{now.index + 1} {puzzle.title}</Text>
-          <Text dimColor> · solved {score.solved} · streak {score.streak}</Text>
+          <Text dimColor> · {LEVEL_NAMES[puzzle.level]} · solved {score.solved} · streak {score.streak}</Text>
         </Text>
+        <Text dimColor>From {puzzle.game}</Text>
         <Box flexDirection="column" marginY={1}>
           {ranks.map(rank => (
             <Box key={`rank-${rank}`} flexDirection="row">
@@ -254,6 +289,7 @@ export const register: Register = on => {
           ) : (
             <Button key="next" label="Next puzzle" hotkey="n" variant="primary" onPress={() => nextPuzzle($)} />
           )}
+          <Button key="level" label={`Level: ${LEVEL_NAMES[choice]}`} hotkey="l" onPress={() => cycleLevel($)} />
         </Box>
       </Box>
     )

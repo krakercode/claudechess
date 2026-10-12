@@ -82,3 +82,18 @@ test('a turn leaves the pane shut after /chess off', async ($, on) => {
   await $.turn.start({ text: 'fix the bug', turnId: 't1' })
   expect(opened).toEqual([])
 })
+
+test('the level button deals puzzles of that level', async ($, on) => {
+  mock.store(on)
+  const ui = await $.ui.mount({ ...PANE, surface: 'terminal' })
+  expect(await ui.find({ text: /Level: Mixed/ })).toBeDefined()
+  expect(await ui.find({ text: /^From / })).toBeDefined()
+  for (const name of ['Easy', 'Medium', 'Hard']) {
+    await ui.press({ key: 'level' })
+    expect(await ui.find({ text: new RegExp(`Level: ${name}`) })).toBeDefined()
+    expect(await ui.find({ text: new RegExp(` · ${name} · `) })).toBeDefined()
+    await ui.press({ key: 'skip' })
+    expect(await ui.find({ text: new RegExp(` · ${name} · `) })).toBeDefined()
+  }
+  await ui.unmount()
+})

@@ -48,14 +48,20 @@ test('typed moves match in UCI and in loose SAN', () => {
   assert.ok(!isSameMove('O-O', castle))
 })
 
-test('every puzzle plays through cleanly and ends in mate', () => {
-  assert.ok(PUZZLES.length >= 40)
+test('every puzzle plays through cleanly and ends on the solver\'s move', () => {
+  assert.ok(PUZZLES.length >= 80)
   for (const [n, puzzle] of PUZZLES.entries()) {
     const label = `puzzle ${n + 1} (${puzzle.fen})`
-    const mateIn = Number(puzzle.title.match(/Mate in (\d)/)?.[1])
-    assert.equal(puzzle.moves.length, mateIn * 2 - 1, label)
+    const mateIn = puzzle.title.match(/^Mate in (\d)$/)?.[1]
+    if (mateIn) {
+      assert.equal(puzzle.moves.length, Number(mateIn) * 2 - 1, label)
+      assert.match(puzzle.san.at(-1)!, /#$/, label)
+    } else {
+      assert.equal(puzzle.title, 'Find the win', label)
+      assert.equal(puzzle.moves.length % 2, 1, label)
+    }
     assert.equal(puzzle.san.length, puzzle.moves.length, label)
-    assert.match(puzzle.san.at(-1)!, /#$/, label)
+    assert.ok(puzzle.game.length > 0, label)
     let position = parseFen(puzzle.fen)
     for (const [ply, uci] of puzzle.moves.entries()) {
       const piece = position.squares[squareIndex(uci.slice(0, 2))]
@@ -65,4 +71,13 @@ test('every puzzle plays through cleanly and ends in mate', () => {
       position = applyUci(position, uci)
     }
   }
+})
+
+test('each level has a fair share of the puzzles, easiest first', () => {
+  const order = ['easy', 'medium', 'hard']
+  for (const level of order) {
+    assert.ok(PUZZLES.filter(puzzle => puzzle.level === level).length >= PUZZLES.length / 4, level)
+  }
+  const ranks = PUZZLES.map(puzzle => order.indexOf(puzzle.level))
+  assert.deepEqual(ranks, [...ranks].sort((a, b) => a - b))
 })
