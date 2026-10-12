@@ -1,8 +1,24 @@
+/** A puzzle fetched from Lichess, in the shape of the built-in ones. */
+export type DailyPuzzle = {
+  id: string
+  rating: number
+  title: string
+  level: 'easy' | 'medium' | 'hard'
+  game: string
+  fen: string
+  moves: string[]
+  san: string[]
+}
+
 export type PuzzleStatus = 'solving' | 'solved' | 'revealed'
 
 export type PuzzleProgress = {
   /** Index into PUZZLES of the puzzle on the board. */
   index: number
+  /** Dealt again from the review queue, after a miss. */
+  isReview: boolean
+  /** The Lichess puzzle of the day, when that is the one on the board (index is then -1). */
+  daily?: DailyPuzzle
   /** Moves of the solution line already played. */
   ply: number
   /** The position on the board, as FEN. */
@@ -28,6 +44,8 @@ declare module 'claude-code' {
       stats: PuzzleStats
       isWorking: boolean
       level: LevelChoice
+      /** Puzzles missed, revealed or solved after a hint, oldest first, as indexes into PUZZLES. */
+      review: number[]
     }
   }
 }
