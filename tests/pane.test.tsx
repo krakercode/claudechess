@@ -2,6 +2,7 @@ import type { On } from 'claude-code'
 import { expect, mock, test } from 'claude-code/testing'
 
 import { PUZZLES } from '../hooks/puzzles.ts'
+import { DAILY_JSON } from './fixtures-daily.ts'
 
 const PLUGIN = 'chess-puzzles'
 const PANE = {
@@ -134,5 +135,36 @@ test('showing the solution queues the puzzle for review', async ($, on) => {
   const ui = await $.ui.mount({ ...PANE, surface: 'desktop' })
   await ui.press({ key: 'reveal' })
   expect(await ui.find({ text: /1 to review/ })).toBeDefined()
+  await ui.unmount()
+})
+
+test('the Lichess daily puzzle is fetched, played and ticked off', async ($, on) => {
+  mock.store(on)
+  const fetched: string[] = []
+  on('http.fetch', ($, e) => {
+    fetched.push(e.url)
+    return { value: { status: 200, ok: true, headers: {}, text: DAILY_JSON } }
+  })
+  const ui = await $.ui.mount({ ...PANE, surface: 'terminal' })
+  await ui.press({ key: 'daily' })
+  expect(fetched).toEqual(['https://lichess.org/api/puzzle/daily'])
+  expect(await ui.find({ text: /Lichess daily Mate in 3/ })).toBeDefined()
+  expect(await ui.find({ text: /Legal vs SaintBrie/ })).toBeDefined()
+  await solveByPressing(ui, ['f3e5', 'g4d1', 'c4f7', 'e8e7', 'c3d5'])
+  expect(await ui.find({ text: /Nd5# — solved!/ })).toBeDefined()
+  await ui.press({ key: 'next' })
+  expect(await ui.find({ text: /Daily ✓/ })).toBeDefined()
+  await ui.press({ key: 'daily' })
+  expect(fetched.length).toBe(1)
+  await ui.unmount()
+})
+
+test('the daily puzzle says so when Lichess cannot be reached', async ($, on) => {
+  mock.store(on)
+  on('http.fetch', () => ({ value: { status: 503, ok: false, headers: {}, text: '' } }))
+  const ui = await $.ui.mount({ ...PANE, surface: 'desktop' })
+  await ui.press({ key: 'daily' })
+  expect(await ui.find({ text: /Could not reach Lichess/ })).toBeDefined()
+  expect(await ui.find({ text: /#1 / })).toBeDefined()
   await ui.unmount()
 })

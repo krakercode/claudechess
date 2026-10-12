@@ -15,6 +15,8 @@ sessions, and picks up at the next puzzle where you left off.
 - A puzzle you got wrong, needed a hint for, or gave up on goes into a review
   queue and comes back as every third puzzle dealt, until you solve it
   without a slip. The header shows how many are waiting.
+- **Daily** (`d`) deals the [Lichess puzzle of the day](https://lichess.org/training/daily),
+  fetched from Lichess once a day. It shows a tick once you have solved it.
 - **Level** (`l`) switches between Mixed (easiest to hardest, then round again),
   Easy, Medium and Hard. The pane remembers the level.
 
@@ -33,6 +35,7 @@ Answer `y` to add the marketplace, then pick a scope.
 - `/chess` opens the pane. `/chess next` opens it on a fresh puzzle.
 - `/chess easy`, `/chess medium`, `/chess hard` or `/chess mixed` picks the level.
 - `/chess review` deals the oldest puzzle in the review queue now.
+- `/chess daily` deals the Lichess puzzle of the day.
 - `/chess off` stops it opening by itself when Claude starts working; `/chess on` turns that back on.
 
 On a narrow terminal the pane waits for room when it opens by itself; `/chess` opens it at any width.

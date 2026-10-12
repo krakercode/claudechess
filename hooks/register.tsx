@@ -1,9 +1,10 @@
 import { atom, read, update } from 'claude-code'
 import type { EngineInterface, Register } from 'claude-code'
 
-import type { LevelChoice, PuzzleProgress, PuzzleStats } from '../types'
+import type { DailyPuzzle, LevelChoice, PuzzleProgress, PuzzleStats } from '../types'
 import { applyUci, colorOf, isSameMove, parseFen, pieceName, squareIndex, squareName, toFen } from './chess.ts'
-import { PUZZLES } from './puzzles.ts'
+import { DAILY_URL, dailyFromLichess } from './lichess.ts'
+import { type Puzzle, PUZZLES } from './puzzles.ts'
 
 const PANE = 'chess-puzzles'
 const TITLE = 'Chess puzzle'
@@ -21,6 +22,8 @@ const AUTO_OPEN_KEY = 'autoOpen'
 const LEVEL_KEY = 'level'
 const REVIEW_KEY = 'review'
 const SINCE_REVIEW_KEY = 'sinceReview'
+const DAILY_KEY = 'daily'
+const DAILY_SOLVED_KEY = 'dailySolved'
 
 /** Every this many puzzles dealt, one comes from the review queue if it holds one at the level. */
 const REVIEW_EVERY = 3
@@ -40,11 +43,15 @@ const firstAt = (index: number, choice: LevelChoice): number => {
   return index % PUZZLES.length
 }
 
-const fresh = (index: number, isReview = false): PuzzleProgress => {
-  const puzzle = PUZZLES[index]!
+/** The puzzle on the board: the daily one it carries, or one of the set. */
+const puzzleOf = (now: PuzzleProgress): Puzzle => now.daily ?? PUZZLES[now.index]!
+
+const fresh = (index: number, isReview = false, daily?: DailyPuzzle): PuzzleProgress => {
+  const puzzle = daily ?? PUZZLES[index]!
   return {
     index,
     isReview,
+    ...(daily && { daily }),
     ply: 0,
     fen: puzzle.fen,
     selected: null,
@@ -113,12 +120,41 @@ const startReview = async ($: EngineInterface): Promise<boolean> => {
   return true
 }
 
+const today = () => new Date().toISOString().slice(0, 10)
+
+/** Today's Lichess puzzle, fetched once a day; undefined when Lichess cannot be reached. */
+const dailyPuzzle = async ($: EngineInterface): Promise<DailyPuzzle | undefined> => {
+  const saved = (await $.store.get(DAILY_KEY)) as { date: string; puzzle: DailyPuzzle } | undefined
+  if (saved?.date === today()) return saved.puzzle
+  try {
+    const response = await $.http.fetch(DAILY_URL, { headers: { accept: 'application/json' } })
+    if (!response.ok) return undefined
+    const puzzle = dailyFromLichess(response.text)
+    await $.store.set(DAILY_KEY, { date: today(), puzzle })
+    return puzzle
+  } catch {
+    return undefined
+  }
+}
+
+/** Deals the Lichess puzzle of the day; false when it could not be fetched. */
+const dealDaily = async ($: EngineInterface): Promise<boolean> => {
+  await current($)
+  const puzzle = await dailyPuzzle($)
+  if (!puzzle) {
+    await update($, progress, value => value && { ...value, message: 'Could not reach Lichess for the daily puzzle.' })
+    return false
+  }
+  await update($, progress, () => fresh(-1, false, puzzle))
+  return true
+}
+
 /** Switches the level and deals a puzzle at it, unless the one on the board already is. */
 const setLevel = async ($: EngineInterface, choice: LevelChoice) => {
   await update($, level, () => choice)
   await $.store.set(LEVEL_KEY, choice)
   const now = await current($)
-  if (choice !== 'mixed' && PUZZLES[now.index]!.level !== choice) await deal($, await lastNew($))
+  if (choice !== 'mixed' && puzzleOf(now).level !== choice) await deal($, await lastNew($))
 }
 
 const cycleLevel = async ($: EngineInterface) => {
@@ -138,7 +174,7 @@ const recordSolve = async ($: EngineInterface, isClean: boolean) => {
 const tryMove = async ($: EngineInterface, typed: string) => {
   const now = await current($)
   if (now.status !== 'solving') return
-  const puzzle = PUZZLES[now.index]!
+  const puzzle = puzzleOf(now)
   const expected = { uci: puzzle.moves[now.ply]!, san: puzzle.san[now.ply]! }
 
   if (!isSameMove(typed, expected)) {
@@ -155,8 +191,9 @@ const tryMove = async ($: EngineInterface, typed: string) => {
   if (ply >= puzzle.moves.length) {
     message = `${expected.san} — solved!`
     await recordSolve($, now.misses === 0)
+    if (now.daily) await $.store.set(DAILY_SOLVED_KEY, today())
     // A slip or a hint puts the puzzle in the review queue; a clean solve takes it out.
-    await saveReview($, queue =>
+    if (!now.daily) await saveReview($, queue =>
       now.misses === 0 ? queue.filter(index => index !== now.index) : queue.includes(now.index) ? queue : [...queue, now.index],
     )
     await update($, progress, value => value && { ...value, fen: toFen(position), ply, selected: null, status: 'solved' as const, message })
@@ -189,7 +226,7 @@ const pressSquare = async ($: EngineInterface, square: string) => {
   if (!now.selected) return
 
   // A promotion picked by clicks takes the piece the solution promotes to.
-  const puzzle = PUZZLES[now.index]!
+  const puzzle = puzzleOf(now)
   const expected = puzzle.moves[now.ply] ?? ''
   const uci = now.selected + square
   await tryMove($, expected.startsWith(uci) ? expected : uci)
@@ -198,7 +235,7 @@ const pressSquare = async ($: EngineInterface, square: string) => {
 const hint = async ($: EngineInterface) => {
   const now = await current($)
   if (now.status !== 'solving') return
-  const puzzle = PUZZLES[now.index]!
+  const puzzle = puzzleOf(now)
   const from = puzzle.moves[now.ply]!.slice(0, 2)
   const piece = parseFen(now.fen).squares[squareIndex(from)] ?? ''
   await update($, progress, value =>
@@ -209,10 +246,10 @@ const hint = async ($: EngineInterface) => {
 const reveal = async ($: EngineInterface) => {
   const now = await current($)
   if (now.status !== 'solving') return
-  const puzzle = PUZZLES[now.index]!
+  const puzzle = puzzleOf(now)
   await update($, stats, value => ({ ...value, streak: 0 }))
   await $.store.set(STATS_KEY, await read($, stats))
-  await saveReview($, queue => (queue.includes(now.index) ? queue : [...queue, now.index]))
+  if (!now.daily) await saveReview($, queue => (queue.includes(now.index) ? queue : [...queue, now.index]))
   await update($, progress, value =>
     value && { ...value, status: 'revealed' as const, selected: null, message: `Solution: ${puzzle.san.join(' ')}` },
   )
@@ -225,8 +262,8 @@ export const register: Register = on => {
     await $.command.register({
       name: 'chess',
       description:
-        'Open the chess puzzle pane; "/chess easy", "medium", "hard" or "mixed" picks the level; "/chess review" retries a missed puzzle; "/chess off" stops it opening while Claude works, "/chess on" turns that back on',
-      argumentHint: '[easy|medium|hard|mixed|next|review|on|off]',
+        'Open the chess puzzle pane; "/chess daily" deals the Lichess puzzle of the day; "/chess easy", "medium", "hard" or "mixed" picks the level; "/chess review" retries a missed puzzle; "/chess off" stops it opening while Claude works, "/chess on" turns that back on',
+      argumentHint: '[daily|easy|medium|hard|mixed|next|review|on|off]',
     })
     const saved = (await $.store.get(STATS_KEY)) as PuzzleStats | undefined
     if (saved) await update($, stats, () => saved)
@@ -253,6 +290,7 @@ export const register: Register = on => {
     }
     if (arg === 'next') await nextPuzzle($)
     if (arg === 'review' && !(await startReview($))) return { text: 'No missed puzzles to review yet.' }
+    if (arg === 'daily' && !(await dealDaily($))) return { text: 'Could not reach Lichess for the daily puzzle.' }
     if (isLevelChoice(arg)) await setLevel($, arg)
     await current($)
     const opened = await openPane($)
@@ -287,7 +325,8 @@ export const register: Register = on => {
     const working = await read($, isWorking)
     const choice = await read($, level)
     const toReview = (await read($, review)).length
-    const puzzle = PUZZLES[now.index]!
+    const isDailyDone = (await $.store.get(DAILY_SOLVED_KEY)) === today()
+    const puzzle = puzzleOf(now)
     const position = parseFen(now.fen)
     // The board faces the side the person plays: the side to move at the start.
     const isFlipped = parseFen(puzzle.fen).turn === 'b'
@@ -317,7 +356,9 @@ export const register: Register = on => {
           {working ? 'Claude is working. A puzzle while you wait:' : 'Claude is done. Finish up, or close the pane.'}
         </Text>
         <Text>
-          <Text bold>#{now.index + 1} {puzzle.title}</Text>
+          <Text bold>
+            {now.daily ? 'Lichess daily' : `#${now.index + 1}`} {puzzle.title}
+          </Text>
           <Text dimColor>
             {' '}· {LEVEL_NAMES[puzzle.level]}
             {now.isReview ? ' · review' : ''} · solved {score.solved} · streak {score.streak}
@@ -349,6 +390,7 @@ export const register: Register = on => {
             <Button key="next" label="Next puzzle" hotkey="n" variant="primary" onPress={() => nextPuzzle($)} />
           )}
           <Button key="level" label={`Level: ${LEVEL_NAMES[choice]}`} hotkey="l" onPress={() => cycleLevel($)} />
+          {!now.daily && <Button key="daily" label={isDailyDone ? 'Daily ✓' : 'Daily'} hotkey="d" onPress={() => dealDaily($)} />}
         </Box>
       </Box>
     )
