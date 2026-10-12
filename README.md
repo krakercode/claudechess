@@ -12,6 +12,9 @@ sessions, and picks up at the next puzzle where you left off.
 - **Hint** (`h`) names the piece to move.
 - **Show solution** (`s`) prints the solution line.
 - **Skip** / **Next puzzle** (`n`) deals the next one.
+- A puzzle you got wrong, needed a hint for, or gave up on goes into a review
+  queue and comes back as every third puzzle dealt, until you solve it
+  without a slip. The header shows how many are waiting.
 - **Level** (`l`) switches between Mixed (easiest to hardest, then round again),
   Easy, Medium and Hard. The pane remembers the level.
 
@@ -29,6 +32,7 @@ Answer `y` to add the marketplace, then pick a scope.
 
 - `/chess` opens the pane. `/chess next` opens it on a fresh puzzle.
 - `/chess easy`, `/chess medium`, `/chess hard` or `/chess mixed` picks the level.
+- `/chess review` deals the oldest puzzle in the review queue now.
 - `/chess off` stops it opening by itself when Claude starts working; `/chess on` turns that back on.
 
 On a narrow terminal the pane waits for room when it opens by itself; `/chess` opens it at any width.

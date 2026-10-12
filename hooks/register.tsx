@@ -12,12 +12,18 @@ const progress = atom({ plugin: 'chess-puzzles', key: 'progress' } as const, nul
 const stats = atom({ plugin: 'chess-puzzles', key: 'stats' } as const, { solved: 0, streak: 0 })
 const isWorking = atom({ plugin: 'chess-puzzles', key: 'isWorking' } as const, false)
 const level = atom({ plugin: 'chess-puzzles', key: 'level' } as const, 'mixed')
+const review = atom({ plugin: 'chess-puzzles', key: 'review' } as const, [])
 
 // $.store keys: kept across sessions.
 const NEXT_KEY = 'next'
 const STATS_KEY = 'stats'
 const AUTO_OPEN_KEY = 'autoOpen'
 const LEVEL_KEY = 'level'
+const REVIEW_KEY = 'review'
+const SINCE_REVIEW_KEY = 'sinceReview'
+
+/** Every this many puzzles dealt, one comes from the review queue if it holds one at the level. */
+const REVIEW_EVERY = 3
 
 const LEVELS: LevelChoice[] = ['mixed', 'easy', 'medium', 'hard']
 const LEVEL_NAMES: Record<LevelChoice, string> = { mixed: 'Mixed', easy: 'Easy', medium: 'Medium', hard: 'Hard' }
@@ -34,14 +40,15 @@ const firstAt = (index: number, choice: LevelChoice): number => {
   return index % PUZZLES.length
 }
 
-const fresh = (index: number): PuzzleProgress => {
+const fresh = (index: number, isReview = false): PuzzleProgress => {
   const puzzle = PUZZLES[index]!
   return {
     index,
+    isReview,
     ply: 0,
     fen: puzzle.fen,
     selected: null,
-    message: `${sideName(puzzle.fen)} to move. ${puzzle.title}.`,
+    message: `${isReview ? 'Another try. ' : ''}${sideName(puzzle.fen)} to move. ${puzzle.title}.`,
     status: 'solving',
     misses: 0,
   }
@@ -61,20 +68,57 @@ const current = async ($: EngineInterface): Promise<PuzzleProgress> => {
   return (await read($, progress)) ?? dealt
 }
 
+/** The last new (not review) puzzle dealt. */
+const lastNew = async ($: EngineInterface) => Number((await $.store.get(NEXT_KEY)) ?? 0)
+
 const deal = async ($: EngineInterface, from: number) => {
   const index = firstAt(from, await read($, level))
   await $.store.set(NEXT_KEY, index)
   await update($, progress, () => fresh(index))
 }
 
-const nextPuzzle = async ($: EngineInterface) => deal($, (await current($)).index + 1)
+const saveReview = async ($: EngineInterface, change: (queue: number[]) => number[]) => {
+  await update($, review, change)
+  await $.store.set(REVIEW_KEY, await read($, review))
+}
+
+/** The oldest puzzle in the review queue at the level, other than the one on the board. */
+const dueReview = async ($: EngineInterface, choice: LevelChoice): Promise<number | undefined> => {
+  const now = await read($, progress)
+  return (await read($, review)).find(
+    index => index !== now?.index && (choice === 'mixed' || PUZZLES[index]?.level === choice),
+  )
+}
+
+const dealReview = async ($: EngineInterface, index: number) => {
+  await $.store.set(SINCE_REVIEW_KEY, 0)
+  await update($, progress, () => fresh(index, true))
+}
+
+const nextPuzzle = async ($: EngineInterface) => {
+  await current($)
+  const since = Number((await $.store.get(SINCE_REVIEW_KEY)) ?? 0) + 1
+  const due = since >= REVIEW_EVERY ? await dueReview($, await read($, level)) : undefined
+  if (due !== undefined) return dealReview($, due)
+  await $.store.set(SINCE_REVIEW_KEY, since)
+  await deal($, (await lastNew($)) + 1)
+}
+
+/** Deals the oldest missed puzzle at any level; false when there is none. */
+const startReview = async ($: EngineInterface): Promise<boolean> => {
+  await current($)
+  const due = await dueReview($, 'mixed')
+  if (due === undefined) return false
+  await dealReview($, due)
+  return true
+}
 
 /** Switches the level and deals a puzzle at it, unless the one on the board already is. */
 const setLevel = async ($: EngineInterface, choice: LevelChoice) => {
   await update($, level, () => choice)
   await $.store.set(LEVEL_KEY, choice)
   const now = await current($)
-  if (choice !== 'mixed' && PUZZLES[now.index]!.level !== choice) await deal($, now.index)
+  if (choice !== 'mixed' && PUZZLES[now.index]!.level !== choice) await deal($, await lastNew($))
 }
 
 const cycleLevel = async ($: EngineInterface) => {
@@ -111,6 +155,10 @@ const tryMove = async ($: EngineInterface, typed: string) => {
   if (ply >= puzzle.moves.length) {
     message = `${expected.san} — solved!`
     await recordSolve($, now.misses === 0)
+    // A slip or a hint puts the puzzle in the review queue; a clean solve takes it out.
+    await saveReview($, queue =>
+      now.misses === 0 ? queue.filter(index => index !== now.index) : queue.includes(now.index) ? queue : [...queue, now.index],
+    )
     await update($, progress, value => value && { ...value, fen: toFen(position), ply, selected: null, status: 'solved' as const, message })
     return
   }
@@ -164,6 +212,7 @@ const reveal = async ($: EngineInterface) => {
   const puzzle = PUZZLES[now.index]!
   await update($, stats, value => ({ ...value, streak: 0 }))
   await $.store.set(STATS_KEY, await read($, stats))
+  await saveReview($, queue => (queue.includes(now.index) ? queue : [...queue, now.index]))
   await update($, progress, value =>
     value && { ...value, status: 'revealed' as const, selected: null, message: `Solution: ${puzzle.san.join(' ')}` },
   )
@@ -176,13 +225,17 @@ export const register: Register = on => {
     await $.command.register({
       name: 'chess',
       description:
-        'Open the chess puzzle pane; "/chess easy", "medium", "hard" or "mixed" picks the level; "/chess off" stops it opening while Claude works, "/chess on" turns that back on',
-      argumentHint: '[easy|medium|hard|mixed|next|on|off]',
+        'Open the chess puzzle pane; "/chess easy", "medium", "hard" or "mixed" picks the level; "/chess review" retries a missed puzzle; "/chess off" stops it opening while Claude works, "/chess on" turns that back on',
+      argumentHint: '[easy|medium|hard|mixed|next|review|on|off]',
     })
     const saved = (await $.store.get(STATS_KEY)) as PuzzleStats | undefined
     if (saved) await update($, stats, () => saved)
     const savedLevel = await $.store.get(LEVEL_KEY)
     if (isLevelChoice(savedLevel)) await update($, level, () => savedLevel)
+    const savedReview = await $.store.get(REVIEW_KEY)
+    if (Array.isArray(savedReview)) {
+      await update($, review, () => savedReview.filter((index): index is number => Number.isInteger(index) && index >= 0 && index < PUZZLES.length))
+    }
     await current($)
 
     return next(e)
@@ -199,6 +252,7 @@ export const register: Register = on => {
       return { text: 'The chess pane will open whenever Claude starts working.' }
     }
     if (arg === 'next') await nextPuzzle($)
+    if (arg === 'review' && !(await startReview($))) return { text: 'No missed puzzles to review yet.' }
     if (isLevelChoice(arg)) await setLevel($, arg)
     await current($)
     const opened = await openPane($)
@@ -232,6 +286,7 @@ export const register: Register = on => {
     const score = await read($, stats)
     const working = await read($, isWorking)
     const choice = await read($, level)
+    const toReview = (await read($, review)).length
     const puzzle = PUZZLES[now.index]!
     const position = parseFen(now.fen)
     // The board faces the side the person plays: the side to move at the start.
@@ -263,7 +318,11 @@ export const register: Register = on => {
         </Text>
         <Text>
           <Text bold>#{now.index + 1} {puzzle.title}</Text>
-          <Text dimColor> · {LEVEL_NAMES[puzzle.level]} · solved {score.solved} · streak {score.streak}</Text>
+          <Text dimColor>
+            {' '}· {LEVEL_NAMES[puzzle.level]}
+            {now.isReview ? ' · review' : ''} · solved {score.solved} · streak {score.streak}
+            {toReview > 0 ? ` · ${toReview} to review` : ''}
+          </Text>
         </Text>
         <Text dimColor>From {puzzle.game}</Text>
         <Box flexDirection="column" marginY={1}>

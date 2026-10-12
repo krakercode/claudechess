@@ -97,3 +97,42 @@ test('the level button deals puzzles of that level', async ($, on) => {
   }
   await ui.unmount()
 })
+
+const solveByPressing = async (ui: { press: (target: { key: string }) => Promise<unknown> }, moves: string[]) => {
+  for (let ply = 0; ply < moves.length; ply += 2) {
+    await ui.press({ key: moves[ply]!.slice(0, 2) })
+    await ui.press({ key: moves[ply]!.slice(2, 4) })
+  }
+}
+
+test('a missed puzzle comes back for review, and a clean solve clears it', async ($, on) => {
+  mock.store(on)
+  const puzzle = PUZZLES[0]!
+  const ui = await $.ui.mount({ ...PANE, surface: 'terminal' })
+  await ui.input({ key: 'move', text: 'a1a1' })
+  await solveByPressing(ui, puzzle.moves)
+  expect(await ui.find({ text: /1 to review/ })).toBeDefined()
+
+  await ui.press({ key: 'next' })
+  expect(await ui.find({ text: /#2 / })).toBeDefined()
+  await ui.press({ key: 'skip' })
+  expect(await ui.find({ text: /#3 / })).toBeDefined()
+  await ui.press({ key: 'skip' })
+  expect(await ui.find({ text: /#1 / })).toBeDefined()
+  expect(await ui.find({ text: / · review · / })).toBeDefined()
+  expect(await ui.find({ text: /Another try/ })).toBeDefined()
+
+  await solveByPressing(ui, puzzle.moves)
+  expect(await ui.find({ text: /to review/ })).toBeUndefined()
+  await ui.press({ key: 'next' })
+  expect(await ui.find({ text: /#4 / })).toBeDefined()
+  await ui.unmount()
+})
+
+test('showing the solution queues the puzzle for review', async ($, on) => {
+  mock.store(on)
+  const ui = await $.ui.mount({ ...PANE, surface: 'desktop' })
+  await ui.press({ key: 'reveal' })
+  expect(await ui.find({ text: /1 to review/ })).toBeDefined()
+  await ui.unmount()
+})

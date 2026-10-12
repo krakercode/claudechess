@@ -3,6 +3,8 @@ export type PuzzleStatus = 'solving' | 'solved' | 'revealed'
 export type PuzzleProgress = {
   /** Index into PUZZLES of the puzzle on the board. */
   index: number
+  /** Dealt again from the review queue, after a miss. */
+  isReview: boolean
   /** Moves of the solution line already played. */
   ply: number
   /** The position on the board, as FEN. */
@@ -28,6 +30,8 @@ declare module 'claude-code' {
       stats: PuzzleStats
       isWorking: boolean
       level: LevelChoice
+      /** Puzzles missed, revealed or solved after a hint, oldest first, as indexes into PUZZLES. */
+      review: number[]
     }
   }
 }
