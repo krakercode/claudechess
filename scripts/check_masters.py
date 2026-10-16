@@ -1,10 +1,10 @@
-"""Checks the puzzle set with python-chess and Stockfish.
+"""Checks the master-game puzzles with python-chess and Stockfish.
 
 Needs `pip install chess==1.10.0` and a Stockfish 16 binary (`apt-get install
 stockfish` on Ubuntu 24.04; set STOCKFISH to point at another one). Reads the
 puzzles as JSON on stdin:
-  node --experimental-strip-types -e "import('./hooks/puzzles.ts').then(m => console.log(JSON.stringify(m.PUZZLES)))" \
-    | python3 scripts/check_puzzles.py
+  node --experimental-strip-types -e "import('./hooks/masters.ts').then(m => console.log(JSON.stringify(m.MASTERS)))" \
+    | python3 scripts/check_masters.py
 
 For every puzzle: the line is legal, its SAN is as written, and it ends on the
 solver's move in mate or a clear advantage. At each of the solver's moves the

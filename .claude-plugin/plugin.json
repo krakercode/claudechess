@@ -1,7 +1,7 @@
 {
   "name": "chess-puzzles",
-  "version": "0.1.0",
-  "description": "A pane of chess puzzles to solve while Claude is working",
+  "version": "0.2.0",
+  "description": "Claude Chess: rated Lichess puzzles, theme drills and famous games to play while Claude works",
   "author": {
     "name": "krakercode"
   },
