@@ -1,0 +1,493 @@
+[Id "immortal"]
+[Name "The Immortal Game"]
+[White "Adolf Anderssen"]
+[Black "Lionel Kieseritzky"]
+[Event "London (a casual game)"]
+[Date "1851"]
+[Result "1-0"]
+[Source "https://en.wikipedia.org/wiki/Immortal_Game"]
+[Blurb "Played for fun during a break in the London 1851 tournament. Anderssen gives up a bishop, both rooks and his queen, then mates with his three remaining minor pieces. Kieseritzky is said to have resigned before the end, so the last moves may never have been played."]
+
+1. e4 e5 2. f4 exf4 3. Bc4 Qh4+ 4. Kf1 b5 5. Bxb5 Nf6 6. Nf3 Qh6 7. d3 Nh5 8.
+Nh4 Qg5 9. Nf5 c6 10. g4 Nf6 11. Rg1 cxb5 12. h4 Qg6 13. h5 Qg5 14. Qf3 Ng8 15.
+Bxf4 Qf6 16. Nc3 Bc5 17. Nd5 Qxb2 18. Bd6 Bxg1 19. e5 Qxa1+ 20. Ke2 Na6 21.
+Nxg7+ Kd8 22. Qf6+ Nxf6 23. Be7# 1-0
+
+[Id "evergreen"]
+[Name "The Evergreen Game"]
+[White "Adolf Anderssen"]
+[Black "Jean Dufresne"]
+[Event "Berlin (probably a casual game)"]
+[Date "1852"]
+[Result "1-0"]
+[Source "https://en.wikipedia.org/wiki/Evergreen_Game"]
+[Blurb "Steinitz named it after the quiet 19.Rad1, which sets a trap that Black walks straight into. The finish is a queen sacrifice on d7 and a mate by the two bishops, 24.Bxe7#."]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. b4 Bxb4 5. c3 Ba5 6. d4 exd4 7. O-O d3 8. Qb3
+Qf6 9. e5 Qg6 10. Re1 Nge7 11. Ba3 b5 12. Qxb5 Rb8 13. Qa4 Bb6 14. Nbd2 Bb7 15.
+Ne4 Qf5 16. Bxd3 Qh5 17. Nf6+ gxf6 18. exf6 Rg8 19. Rad1 Qxf3 20. Rxe7+ Nxe7
+21. Qxd7+ Kxd7 22. Bf5+ Ke8 23. Bd7+ Kf8 24. Bxe7# 1-0
+
+[Id "opera"]
+[Name "The Opera Game"]
+[White "Paul Morphy"]
+[Black "Duke Karl of Brunswick and Count Isouard"]
+[Event "Paris, in a box at the opera"]
+[Date "1858"]
+[Result "1-0"]
+[Source "https://en.wikipedia.org/wiki/Opera_Game"]
+[Blurb "Morphy played it in a box at the Paris opera during a performance, against two noblemen choosing Black's moves together. He develops fast, sacrifices freely and mates on move 17. Teachers still use it to show why development matters."]
+
+1. e4 e5 2. Nf3 d6 3. d4 Bg4 4. dxe5 Bxf3 5. Qxf3 dxe5 6. Bc4 Nf6 7. Qb3 Qe7 8.
+Nc3 c6 9. Bg5 b5 10. Nxb5 cxb5 11. Bxb5+ Nbd7 12. O-O-O Rd8 13. Rxd7 Rxd7 14.
+Rd1 Qe6 15. Bxd7+ Nxd7 16. Qb8+ Nxb8 17. Rd8# 1-0
+
+[Id "zukertort-blackburne"]
+[Name "Zukertort's Immortal"]
+[White "Johannes Zukertort"]
+[Black "Joseph Blackburne"]
+[Event "London"]
+[Date "1883"]
+[Result "1-0"]
+[Source "https://oncubanews.com/en/opinion/columns/total-beauty"]
+[Blurb "From the strong London 1883 tournament, which Zukertort won. The point is 28.Qb4!!, a queen offer Black cannot afford to take, and Steinitz praised the finish that starts with 29.Rf8+ as one of the most beautiful combinations ever played."]
+
+1. c4 e6 2. e3 Nf6 3. Nf3 b6 4. Be2 Bb7 5. O-O d5 6. d4 Bd6 7. Nc3 O-O 8. b3
+Nbd7 9. Bb2 Qe7 10. Nb5 Ne4 11. Nxd6 cxd6 12. Nd2 Ndf6 13. f3 Nxd2 14. Qxd2
+dxc4 15. Bxc4 d5 16. Bd3 Rfc8 17. Rae1 Rc7 18. e4 Rac8 19. e5 Ne8 20. f4 g6 21.
+Re3 f5 22. exf6 Nxf6 23. f5 Ne4 24. Bxe4 dxe4 25. fxg6 Rc2 26. gxh7+ Kh8 27.
+d5+ e5 28. Qb4 R8c5 29. Rf8+ Kxh7 30. Qxe4+ Kg7 31. Bxe5+ Kxf8 32. Bg7+ Kg8 33.
+Qxe7 1-0
+
+[Id "lasker-bauer"]
+[Name "Lasker's double bishop sacrifice"]
+[White "Emanuel Lasker"]
+[Black "Johann Bauer"]
+[Event "Amsterdam"]
+[Date "1889"]
+[Result "1-0"]
+[Source "https://en.wikipedia.org/wiki/Lasker_versus_Bauer,_Amsterdam,_1889"]
+[Blurb "Lasker gives up both bishops, on h7 and g7, to strip Black's king of its pawns, then a rook lift wins the queen. The pattern has turned up in master games ever since, from Nimzowitsch against Tarrasch in 1914 to Polgar against Karpov in 2003."]
+
+1. f4 d5 2. e3 Nf6 3. b3 e6 4. Bb2 Be7 5. Bd3 b6 6. Nc3 Bb7 7. Nf3 Nbd7 8. O-O
+O-O 9. Ne2 c5 10. Ng3 Qc7 11. Ne5 Nxe5 12. Bxe5 Qc6 13. Qe2 a6 14. Nh5 Nxh5 15.
+Bxh7+ Kxh7 16. Qxh5+ Kg8 17. Bxg7 Kxg7 18. Qg4+ Kh7 19. Rf3 e5 20. Rh3+ Qh6 21.
+Rxh6+ Kxh6 22. Qd7 Bf6 23. Qxb7 Kg7 24. Rf1 Rab8 25. Qd7 Rfd8 26. Qg4+ Kf8 27.
+fxe5 Bg7 28. e6 Rb7 29. Qg6 f6 30. Rxf6+ Bxf6 31. Qxf6+ Ke8 32. Qh8+ Ke7 33.
+Qg7+ Kxe6 34. Qxb7 Rd6 35. Qxa6 d4 36. exd4 cxd4 37. h4 d3 38. Qxd3 1-0
+
+[Id "steinitz-bardeleben"]
+[Name "Steinitz's rook on the seventh"]
+[White "Wilhelm Steinitz"]
+[Black "Curt von Bardeleben"]
+[Event "Hastings"]
+[Date "1895"]
+[Result "1-0"]
+[Source "https://chesshistory.com/winter/extra/steinitzvonbardeleben.html"]
+[Blurb "Steinitz's rook checks its way along the seventh rank, and neither Black's king nor queen can ever take it. Von Bardeleben did not resign: he walked out of the playing hall and lost on time."]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. c3 Nf6 5. d4 exd4 6. cxd4 Bb4+ 7. Nc3 d5 8.
+exd5 Nxd5 9. O-O Be6 10. Bg5 Be7 11. Bxd5 Bxd5 12. Nxd5 Qxd5 13. Bxe7 Nxe7 14.
+Re1 f6 15. Qe2 Qd7 16. Rac1 c6 17. d5 cxd5 18. Nd4 Kf7 19. Ne6 Rhc8 20. Qg4 g6
+21. Ng5+ Ke8 22. Rxe7+ Kf8 23. Rf7+ Kg8 24. Rg7+ Kh8 25. Rxh7+ 1-0
+
+[Id "rotlewi-rubinstein"]
+[Name "Rubinstein's Immortal"]
+[White "Gersz Rotlewi"]
+[Black "Akiba Rubinstein"]
+[Event "Lodz"]
+[Date "1907"]
+[Result "0-1"]
+[Source "https://en.wikipedia.org/wiki/Rotlewi_versus_Rubinstein"]
+[Blurb "Rubinstein lets his queen go with 22...Rxc3, then offers a rook as well, all to open the long diagonals for his two bishops. White is mated or ruined whatever he does. Hans Kmoch called it Rubinstein's Immortal."]
+
+1. d4 d5 2. Nf3 e6 3. e3 c5 4. c4 Nc6 5. Nc3 Nf6 6. dxc5 Bxc5 7. a3 a6 8. b4
+Bd6 9. Bb2 O-O 10. Qd2 Qe7 11. Bd3 dxc4 12. Bxc4 b5 13. Bd3 Rd8 14. Qe2 Bb7 15.
+O-O Ne5 16. Nxe5 Bxe5 17. f4 Bc7 18. e4 Rac8 19. e5 Bb6+ 20. Kh1 Ng4 21. Be4
+Qh4 22. g3 Rxc3 23. gxh4 Rd2 24. Qxd2 Bxe4+ 25. Qg2 Rh3 0-1
+
+[Id "reti-tartakower"]
+[Name "Réti's mate"]
+[White "Richard Réti"]
+[Black "Savielly Tartakower"]
+[Event "Vienna"]
+[Date "1910"]
+[Result "1-0"]
+[Source "https://www.chesshistory.com/winter/extra/retitartakower.html"]
+[Blurb "A short game in which Réti sacrifices his queen on d8 and mates with his two bishops, a finish now known as Réti's mate. Some early sources end it at 10.Bg5+ with Black resigning; Tartakower's own score has the mate."]
+
+1. e4 c6 2. d4 d5 3. Nc3 dxe4 4. Nxe4 Nf6 5. Qd3 e5 6. dxe5 Qa5+ 7. Bd2 Qxe5 8.
+O-O-O Nxe4 9. Qd8+ Kxd8 10. Bg5+ Kc7 11. Bd8# 1-0
+
+[Id "levitsky-marshall"]
+[Name "The gold coins game"]
+[White "Stepan Levitsky"]
+[Black "Frank Marshall"]
+[Event "Breslau"]
+[Date "1912"]
+[Result "0-1"]
+[Source "https://en.wikipedia.org/wiki/Levitsky_versus_Marshall"]
+[Blurb "Marshall finishes with 23...Qg3!!, putting his queen where three White pieces can take it, and every capture loses. Legend says spectators showered the board with gold coins. That part is disputed, but the name stuck."]
+
+1. d4 e6 2. e4 d5 3. Nc3 c5 4. Nf3 Nc6 5. exd5 exd5 6. Be2 Nf6 7. O-O Be7 8.
+Bg5 O-O 9. dxc5 Be6 10. Nd4 Bxc5 11. Nxe6 fxe6 12. Bg4 Qd6 13. Bh3 Rae8 14. Qd2
+Bb4 15. Bxf6 Rxf6 16. Rad1 Qc5 17. Qe2 Bxc3 18. bxc3 Qxc3 19. Rxd5 Nd4 20. Qh5
+Ref8 21. Re5 Rh6 22. Qg5 Rxh3 23. Rc5 Qg3 0-1
+
+[Id "lasker-thomas"]
+[Name "The king hunt"]
+[White "Edward Lasker"]
+[Black "George Thomas"]
+[Event "London (an informal game)"]
+[Date "1912"]
+[Result "1-0"]
+[Source "https://www.chesshistory.com/winter/extra/laskerthomas.html"]
+[Blurb "Edward Lasker sacrifices his queen on h7 and chases Black's king down the board to g1. He mated with 18.Kd2, though castling queenside would also have mated; he later wrote that the king move needed only one piece moved. Early printed scores of the game disagree on details."]
+
+1. d4 e6 2. Nf3 f5 3. Nc3 Nf6 4. Bg5 Be7 5. Bxf6 Bxf6 6. e4 fxe4 7. Nxe4 b6 8.
+Ne5 O-O 9. Bd3 Bb7 10. Qh5 Qe7 11. Qxh7+ Kxh7 12. Nxf6+ Kh6 13. Neg4+ Kg5 14.
+h4+ Kf4 15. g3+ Kf3 16. Be2+ Kg2 17. Rh2+ Kg1 18. Kd2# 1-0
+
+[Id "capablanca-marshall"]
+[Name "The first Marshall Attack"]
+[White "José Raúl Capablanca"]
+[Black "Frank Marshall"]
+[Event "New York"]
+[Date "1918"]
+[Result "1-0"]
+[Source "https://chesstrapguide.com/learn/capablanca-marshall-1918-pgn/"]
+[Blurb "Marshall springs his gambit 8...d5 on Capablanca, who takes the pawn, survives the attack and wins. The story that Marshall saved the line for years just for this game is doubted by historians, but the opening still carries his name."]
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. O-O Be7 6. Re1 b5 7. Bb3 O-O 8. c3
+d5 9. exd5 Nxd5 10. Nxe5 Nxe5 11. Rxe5 Nf6 12. Re1 Bd6 13. h3 Ng4 14. Qf3 Qh4
+15. d4 Nxf2 16. Re2 Bg4 17. hxg4 Bh2+ 18. Kf1 Bg3 19. Rxf2 Qh1+ 20. Ke2 Bxf2
+21. Bd2 Bh4 22. Qh3 Rae8+ 23. Kd3 Qf1+ 24. Kc2 Bf2 25. Qf3 Qg1 26. Bd5 c5 27.
+dxc5 Bxc5 28. b4 Bd6 29. a4 a5 30. axb5 axb4 31. Ra6 bxc3 32. Nxc3 Bb4 33. b6
+Bxc3 34. Bxc3 h6 35. b7 Re3 36. Bxf7+ 1-0
+
+[Id "bogoljubov-alekhine"]
+[Name "Alekhine's two queens"]
+[White "Efim Bogoljubov"]
+[Black "Alexander Alekhine"]
+[Event "Hastings"]
+[Date "1922"]
+[Result "0-1"]
+[Source "https://chess.com/blog/ThummimS/efim-bogoljubov-vs-alexander-alekhine"]
+[Blurb "One of Alekhine's most famous games. He lets his queen go so a pawn can run through to c1 and queen, and later a second pawn queens on f1 too."]
+
+1. d4 f5 2. c4 Nf6 3. g3 e6 4. Bg2 Bb4+ 5. Bd2 Bxd2+ 6. Nxd2 Nc6 7. Ngf3 O-O 8.
+O-O d6 9. Qb3 Kh8 10. Qc3 e5 11. e3 a5 12. b3 Qe8 13. a3 Qh5 14. h4 Ng4 15. Ng5
+Bd7 16. f3 Nf6 17. f4 e4 18. Rfd1 h6 19. Nh3 d5 20. Nf1 Ne7 21. a4 Nc6 22. Rd2
+Nb4 23. Bh1 Qe8 24. Rg2 dxc4 25. bxc4 Bxa4 26. Nf2 Bd7 27. Nd2 b5 28. Nd1 Nd3
+29. Rxa5 b4 30. Rxa8 bxc3 31. Rxe8 c2 32. Rxf8+ Kh7 33. Nf2 c1=Q+ 34. Nf1 Ne1
+35. Rh2 Qxc4 36. Rb8 Bb5 37. Rxb5 Qxb5 38. g4 Nf3+ 39. Bxf3 exf3 40. gxf5 Qe2
+41. d5 Kg8 42. h5 Kh7 43. e4 Nxe4 44. Nxe4 Qxe4 45. d6 cxd6 46. f6 gxf6 47. Rd2
+Qe2 48. Rxe2 fxe2 49. Kf2 exf1=Q+ 50. Kxf1 Kg7 51. Ke2 Kf7 52. Ke3 Ke6 53. Ke4
+d5+ 0-1
+
+[Id "samisch-nimzowitsch"]
+[Name "The Immortal Zugzwang Game"]
+[White "Friedrich Sämisch"]
+[Black "Aron Nimzowitsch"]
+[Event "Copenhagen"]
+[Date "1923"]
+[Result "0-1"]
+[Source "https://en.wikipedia.org/wiki/Immortal_Zugzwang_Game"]
+[Blurb "Nimzowitsch ties White up so completely that after 25...h6 almost any White move loses material. Whether it is a true zugzwang is argued, since Black also threatens ...R5f3, but the nickname stuck."]
+
+1. d4 Nf6 2. c4 e6 3. Nf3 b6 4. g3 Bb7 5. Bg2 Be7 6. Nc3 O-O 7. O-O d5 8. Ne5
+c6 9. cxd5 cxd5 10. Bf4 a6 11. Rc1 b5 12. Qb3 Nc6 13. Nxc6 Bxc6 14. h3 Qd7 15.
+Kh2 Nh5 16. Bd2 f5 17. Qd1 b4 18. Nb1 Bb5 19. Rg1 Bd6 20. e4 fxe4 21. Qxh5 Rxf2
+22. Qg5 Raf8 23. Kh1 R8f5 24. Qe3 Bd3 25. Rce1 h6 0-1
+
+[Id "botvinnik-capablanca"]
+[Name "Botvinnik's masterpiece"]
+[White "Mikhail Botvinnik"]
+[Black "José Raúl Capablanca"]
+[Event "AVRO tournament, Rotterdam"]
+[Date "1938"]
+[Result "1-0"]
+[Source "https://en.wikipedia.org/wiki/Botvinnik_versus_Capablanca,_AVRO_1938"]
+[Blurb "Botvinnik's 30.Ba3! gives up a bishop to push his e-pawn home, backed by a knight sacrifice on h5. It was judged the most brilliant game of the tournament, and it was the last game between the two before Capablanca died in 1942."]
+
+1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. e3 d5 5. a3 Bxc3+ 6. bxc3 c5 7. cxd5 exd5 8.
+Bd3 O-O 9. Ne2 b6 10. O-O Ba6 11. Bxa6 Nxa6 12. Bb2 Qd7 13. a4 Rfe8 14. Qd3 c4
+15. Qc2 Nb8 16. Rae1 Nc6 17. Ng3 Na5 18. f3 Nb3 19. e4 Qxa4 20. e5 Nd7 21. Qf2
+g6 22. f4 f5 23. exf6 Nxf6 24. f5 Rxe1 25. Rxe1 Re8 26. Re6 Rxe6 27. fxe6 Kg7
+28. Qf4 Qe8 29. Qe5 Qe7 30. Ba3 Qxa3 31. Nh5+ gxh5 32. Qg5+ Kf8 33. Qxf6+ Kg8
+34. e7 Qc1+ 35. Kf2 Qc2+ 36. Kg3 Qd3+ 37. Kh4 Qe4+ 38. Kxh5 Qe2+ 39. Kh4 Qe4+
+40. g4 Qe1+ 41. Kh5 1-0
+
+[Id "byrne-fischer"]
+[Name "The Game of the Century"]
+[White "Donald Byrne"]
+[Black "Bobby Fischer"]
+[Event "Rosenwald Memorial, New York"]
+[Date "1956"]
+[Result "0-1"]
+[Source "https://en.wikipedia.org/wiki/The_Game_of_the_Century_(chess)"]
+[Blurb "Fischer was 13. His knight sacrifice 11...Na4 and queen sacrifice 17...Be6 leave Byrne with a queen against a swarm of rooks, bishops and a knight. Byrne played on to mate as a courtesy, and Hans Kmoch gave the game its name."]
+
+1. Nf3 Nf6 2. c4 g6 3. Nc3 Bg7 4. d4 O-O 5. Bf4 d5 6. Qb3 dxc4 7. Qxc4 c6 8. e4
+Nbd7 9. Rd1 Nb6 10. Qc5 Bg4 11. Bg5 Na4 12. Qa3 Nxc3 13. bxc3 Nxe4 14. Bxe7 Qb6
+15. Bc4 Nxc3 16. Bc5 Rfe8+ 17. Kf1 Be6 18. Bxb6 Bxc4+ 19. Kg1 Ne2+ 20. Kf1
+Nxd4+ 21. Kg1 Ne2+ 22. Kf1 Nc3+ 23. Kg1 axb6 24. Qb4 Ra4 25. Qxb6 Nxd1 26. h3
+Rxa2 27. Kh2 Nxf2 28. Re1 Rxe1 29. Qd8+ Bf8 30. Nxe1 Bd5 31. Nf3 Ne4 32. Qb8 b5
+33. h4 h5 34. Ne5 Kg7 35. Kg1 Bc5+ 36. Kf1 Ng3+ 37. Ke1 Bb4+ 38. Kd1 Bb3+ 39.
+Kc1 Ne2+ 40. Kb1 Nc3+ 41. Kc1 Rc2# 0-1
+
+[Id "polugaevsky-nezhmetdinov"]
+[Name "Nezhmetdinov's queen sacrifice"]
+[White "Lev Polugaevsky"]
+[Black "Rashid Nezhmetdinov"]
+[Event "RSFSR Championship, Sochi"]
+[Date "1958"]
+[Result "0-1"]
+[Source "https://masterinchess.com/immortal-chess-games/2"]
+[Blurb "Nezhmetdinov sacrifices his queen on move 24 and hunts White's king across the board to a5. One of the most celebrated attacking games ever played."]
+
+1. d4 Nf6 2. c4 d6 3. Nc3 e5 4. e4 exd4 5. Qxd4 Nc6 6. Qd2 g6 7. b3 Bg7 8. Bb2
+O-O 9. Bd3 Ng4 10. Nge2 Qh4 11. Ng3 Nge5 12. O-O f5 13. f3 Bh6 14. Qd1 f4 15.
+Nge2 g5 16. Nd5 g4 17. g3 fxg3 18. hxg3 Qh3 19. f4 Be6 20. Bc2 Rf7 21. Kf2 Qh2+
+22. Ke3 Bxd5 23. cxd5 Nb4 24. Rh1 Rxf4 25. Rxh2 Rf3+ 26. Kd4 Bg7 27. a4 c5+ 28.
+dxc6 bxc6 29. Bd3 Nexd3+ 30. Kc4 d5+ 31. exd5 cxd5+ 32. Kb5 Rb8+ 33. Ka5 Nc6+
+0-1
+
+[Id "rbyrne-fischer"]
+[Name "Fischer's brilliancy"]
+[White "Robert Byrne"]
+[Black "Bobby Fischer"]
+[Event "US Championship, New York"]
+[Date "1963"]
+[Result "0-1"]
+[Source "https://masterinchess.com/immortal-chess-games/2"]
+[Blurb "Fischer sacrifices a knight on f2 and tears White's king open, and Byrne resigned after 21...Qd7. Fischer later wrote that he was disappointed: he had hoped for a line that ended in mate."]
+
+1. d4 Nf6 2. c4 g6 3. g3 c6 4. Bg2 d5 5. cxd5 cxd5 6. Nc3 Bg7 7. e3 O-O 8. Nge2
+Nc6 9. O-O b6 10. b3 Ba6 11. Ba3 Re8 12. Qd2 e5 13. dxe5 Nxe5 14. Rfd1 Nd3 15.
+Qc2 Nxf2 16. Kxf2 Ng4+ 17. Kg1 Nxe3 18. Qd2 Nxg2 19. Kxg2 d4 20. Nxd4 Bb7+ 21.
+Kf1 Qd7 0-1
+
+[Id "larsen-spassky"]
+[Name "Spassky's 17-move win"]
+[White "Bent Larsen"]
+[Black "Boris Spassky"]
+[Event "USSR vs Rest of the World, Belgrade"]
+[Date "1970"]
+[Result "0-1"]
+[Source "https://masterinchess.com/immortal-chess-games/2"]
+[Blurb "Larsen took board one for the World team ahead of Fischer. Spassky punished his offbeat opening by sacrificing a knight and a rook for a passed pawn, and won in 17 moves as it queened on f1."]
+
+1. b3 e5 2. Bb2 Nc6 3. c4 Nf6 4. Nf3 e4 5. Nd4 Bc5 6. Nxc6 dxc6 7. e3 Bf5 8.
+Qc2 Qe7 9. Be2 O-O-O 10. f4 Ng4 11. g3 h5 12. h3 h4 13. hxg4 hxg3 14. Rg1 Rh1
+15. Rxh1 g2 16. Rf1 Qh4+ 17. Kd1 gxf1=Q+ 0-1
+
+[Id "fischer-spassky-6"]
+[Name "Fischer's 1.c4"]
+[White "Bobby Fischer"]
+[Black "Boris Spassky"]
+[Event "World Championship, Reykjavik, game 6"]
+[Date "1972"]
+[Result "1-0"]
+[Source "https://en.wikipedia.org/wiki/World_Chess_Championship_1972"]
+[Blurb "Fischer almost always opened 1.e4, and surprised Spassky with 1.c4. He won a model positional game, Spassky joined the audience in applauding, and Fischer took his first lead of the match."]
+
+1. c4 e6 2. Nf3 d5 3. d4 Nf6 4. Nc3 Be7 5. Bg5 O-O 6. e3 h6 7. Bh4 b6 8. cxd5
+Nxd5 9. Bxe7 Qxe7 10. Nxd5 exd5 11. Rc1 Be6 12. Qa4 c5 13. Qa3 Rc8 14. Bb5 a6
+15. dxc5 bxc5 16. O-O Ra7 17. Be2 Nd7 18. Nd4 Qf8 19. Nxe6 fxe6 20. e4 d4 21.
+f4 Qe7 22. e5 Rb8 23. Bc4 Kh8 24. Qh3 Nf8 25. b3 a5 26. f5 exf5 27. Rxf5 Nh7
+28. Rcf1 Qd8 29. Qg3 Re7 30. h4 Rbb7 31. e6 Rbc7 32. Qe5 Qe8 33. a4 Qd8 34.
+R1f2 Qe8 35. R2f3 Qd8 36. Bd3 Qe8 37. Qe4 Nf6 38. Rxf6 gxf6 39. Rxf6 Kg8 40.
+Bc4 Kh8 41. Qf4 1-0
+
+[Id "karpov-kasparov-16"]
+[Name "The octopus knight"]
+[White "Anatoly Karpov"]
+[Black "Garry Kasparov"]
+[Event "World Championship, Moscow, game 16"]
+[Date "1985"]
+[Result "0-1"]
+[Source "https://en.wikipedia.org/wiki/World_Chess_Championship_1985"]
+[Blurb "Kasparov plants a knight on d3 on move 16, and it paralyses White's position until Karpov gives up his queen to remove it on move 34. Kasparov won the match to become world champion at 22."]
+
+1. e4 c5 2. Nf3 e6 3. d4 cxd4 4. Nxd4 Nc6 5. Nb5 d6 6. c4 Nf6 7. N1c3 a6 8. Na3
+d5 9. cxd5 exd5 10. exd5 Nb4 11. Be2 Bc5 12. O-O O-O 13. Bf3 Bf5 14. Bg5 Re8
+15. Qd2 b5 16. Rad1 Nd3 17. Nab1 h6 18. Bh4 b4 19. Na4 Bd6 20. Bg3 Rc8 21. b3
+g5 22. Bxd6 Qxd6 23. g3 Nd7 24. Bg2 Qf6 25. a3 a5 26. axb4 axb4 27. Qa2 Bg6 28.
+d6 g4 29. Qd2 Kg7 30. f3 Qxd6 31. fxg4 Qd4+ 32. Kh1 Nf6 33. Rf4 Ne4 34. Qxd3
+Nf2+ 35. Rxf2 Bxd3 36. Rfd2 Qe3 37. Rxd3 Rc1 38. Nb2 Qf2 39. Nd2 Rxd1+ 40. Nxd1
+Re1+ 0-1
+
+[Id "short-timman"]
+[Name "Short's king walk"]
+[White "Nigel Short"]
+[Black "Jan Timman"]
+[Event "Tilburg"]
+[Date "1991"]
+[Result "1-0"]
+[Source "https://hotoffthechess.com/annotated-short-vs-timman/"]
+[Blurb "With queens and rooks still on the board, Short walks his king from g1 to g5. Black is so tied up that nothing stops the king reaching h6 to help mate on g7, and Timman resigned."]
+
+1. e4 Nf6 2. e5 Nd5 3. d4 d6 4. Nf3 g6 5. Bc4 Nb6 6. Bb3 Bg7 7. Qe2 Nc6 8. O-O
+O-O 9. h3 a5 10. a4 dxe5 11. dxe5 Nd4 12. Nxd4 Qxd4 13. Re1 e6 14. Nd2 Nd5 15.
+Nf3 Qc5 16. Qe4 Qb4 17. Bc4 Nb6 18. b3 Nxc4 19. bxc4 Re8 20. Rd1 Qc5 21. Qh4 b6
+22. Be3 Qc6 23. Bh6 Bh8 24. Rd8 Bb7 25. Rad1 Bg7 26. R8d7 Rf8 27. Bxg7 Kxg7 28.
+R1d4 Rae8 29. Qf6+ Kg8 30. h4 h5 31. Kh2 Rc8 32. Kg3 Rce8 33. Kf4 Bc8 34. Kg5
+1-0
+
+[Id "deep-blue-kasparov-1996"]
+[Name "The first computer win"]
+[White "Deep Blue"]
+[Black "Garry Kasparov"]
+[Event "Deep Blue vs Kasparov, Philadelphia, game 1"]
+[Date "1996"]
+[Result "1-0"]
+[Source "https://en.wikipedia.org/wiki/Deep_Blue_versus_Kasparov,_1996,_Game_1"]
+[Blurb "The first game a computer ever won against a reigning world champion at classical time controls. Kasparov recovered to win the match 4-2."]
+
+1. e4 c5 2. c3 d5 3. exd5 Qxd5 4. d4 Nf6 5. Nf3 Bg4 6. Be2 e6 7. h3 Bh5 8. O-O
+Nc6 9. Be3 cxd4 10. cxd4 Bb4 11. a3 Ba5 12. Nc3 Qd6 13. Nb5 Qe7 14. Ne5 Bxe2
+15. Qxe2 O-O 16. Rac1 Rac8 17. Bg5 Bb6 18. Bxf6 gxf6 19. Nc4 Rfd8 20. Nxb6 axb6
+21. Rfd1 f5 22. Qe3 Qf6 23. d5 Rxd5 24. Rxd5 exd5 25. b3 Kh8 26. Qxb6 Rg8 27.
+Qc5 d4 28. Nd6 f4 29. Nxb7 Ne5 30. Qd5 f3 31. g3 Nd3 32. Rc7 Re8 33. Nd6 Re1+
+34. Kh2 Nxf2 35. Nxf7+ Kg7 36. Ng5+ Kh6 37. Rxh7+ 1-0
+
+[Id "deep-blue-kasparov-1997"]
+[Name "Deep Blue's decider"]
+[White "Deep Blue"]
+[Black "Garry Kasparov"]
+[Event "Deep Blue vs Kasparov, New York, game 6"]
+[Date "1997"]
+[Result "1-0"]
+[Source "https://en.wikipedia.org/wiki/Deep_Blue_versus_Garry_Kasparov"]
+[Blurb "The last game of the rematch, with the score level. Deep Blue sacrifices a knight on e6, Kasparov resigned after 19 moves, and the computer won the match 3.5-2.5."]
+
+1. e4 c6 2. d4 d5 3. Nc3 dxe4 4. Nxe4 Nd7 5. Ng5 Ngf6 6. Bd3 e6 7. N1f3 h6 8.
+Nxe6 Qe7 9. O-O fxe6 10. Bg6+ Kd8 11. Bf4 b5 12. a4 Bb7 13. Re1 Nd5 14. Bg3 Kc8
+15. axb5 cxb5 16. Qd3 Bc6 17. Bf5 exf5 18. Rxe7 Bxe7 19. c4 1-0
+
+[Id "topalov-shirov"]
+[Name "Shirov's ...Bh3!!"]
+[White "Veselin Topalov"]
+[Black "Alexei Shirov"]
+[Event "Linares"]
+[Date "1998"]
+[Result "0-1"]
+[Source "https://en.wikipedia.org/wiki/Alexei_Shirov"]
+[Blurb "In a bishop ending, Shirov gives away his only bishop with 47...Bh3!!, so his king can walk in and his pawns can run. John Emms ranked it first in his book of the most amazing chess moves of all time."]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. cxd5 Nxd5 5. e4 Nxc3 6. bxc3 Bg7 7. Bb5+ c6 8.
+Ba4 O-O 9. Ne2 Nd7 10. O-O e5 11. f3 Qe7 12. Be3 Rd8 13. Qc2 Nb6 14. Bb3 Be6
+15. Rad1 Nc4 16. Bc1 b5 17. f4 exd4 18. Nxd4 Bg4 19. Rde1 Qc5 20. Kh1 a5 21. h3
+Bd7 22. a4 bxa4 23. Ba2 Be8 24. e5 Nb6 25. f5 Nd5 26. Bd2 Nb4 27. Qxa4 Nxa2 28.
+Qxa2 Bxe5 29. fxg6 hxg6 30. Bg5 Rd5 31. Re3 Qd6 32. Qe2 Bd7 33. c4 Bxd4 34.
+cxd5 Bxe3 35. Qxe3 Re8 36. Qc3 Qxd5 37. Bh6 Re5 38. Rf3 Qc5 39. Qa1 Bf5 40. Re3
+f6 41. Rxe5 Qxe5 42. Qa2+ Qd5 43. Qxd5+ cxd5 44. Bd2 a4 45. Bc3 Kf7 46. h4 Ke6
+47. Kg1 Bh3 48. gxh3 Kf5 49. Kf2 Ke4 50. Bxf6 d4 51. Be7 Kd3 52. Bc5 Kc4 53.
+Be7 Kb3 0-1
+
+[Id "kasparov-topalov"]
+[Name "Kasparov's Immortal"]
+[White "Garry Kasparov"]
+[Black "Veselin Topalov"]
+[Event "Wijk aan Zee"]
+[Date "1999"]
+[Result "1-0"]
+[Source "https://en.wikipedia.org/wiki/Kasparov%27s_Immortal"]
+[Blurb "Kasparov's rook sacrifice 24.Rxd4!! starts a king hunt that drives Topalov's king all the way to d1. Often ranked the greatest game ever played."]
+
+1. e4 d6 2. d4 Nf6 3. Nc3 g6 4. Be3 Bg7 5. Qd2 c6 6. f3 b5 7. Nge2 Nbd7 8. Bh6
+Bxh6 9. Qxh6 Bb7 10. a3 e5 11. O-O-O Qe7 12. Kb1 a6 13. Nc1 O-O-O 14. Nb3 exd4
+15. Rxd4 c5 16. Rd1 Nb6 17. g3 Kb8 18. Na5 Ba8 19. Bh3 d5 20. Qf4+ Ka7 21. Rhe1
+d4 22. Nd5 Nbxd5 23. exd5 Qd6 24. Rxd4 cxd4 25. Re7+ Kb6 26. Qxd4+ Kxa5 27. b4+
+Ka4 28. Qc3 Qxd5 29. Ra7 Bb7 30. Rxb7 Qc4 31. Qxf6 Kxa3 32. Qxa6+ Kxb4 33. c3+
+Kxc3 34. Qa1+ Kd2 35. Qb2+ Kd1 36. Bf1 Rd2 37. Rd7 Rxd7 38. Bxc4 bxc4 39. Qxh8
+Rd3 40. Qa8 c3 41. Qa4+ Ke1 42. f4 f5 43. Kc1 Rd2 44. Qa7 1-0
+
+[Id "polgar-kasparov"]
+[Name "Polgar beats Kasparov"]
+[White "Judit Polgar"]
+[Black "Garry Kasparov"]
+[Event "Russia vs Rest of the World, Moscow (rapid)"]
+[Date "2002"]
+[Result "1-0"]
+[Source "https://chesstrapguide.com/learn/polgar-kasparov-2002-pgn/"]
+[Blurb "Polgar takes on Kasparov's Berlin Defence and turns her rooks on his king, stuck in the centre after the early queen trade. It was the first time a woman beat the world number one in competitive play."]
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5 Nf6 4. O-O Nxe4 5. d4 Nd6 6. Bxc6 dxc6 7. dxe5 Nf5
+8. Qxd8+ Kxd8 9. Nc3 h6 10. Rd1+ Ke8 11. h3 Be7 12. Ne2 Nh4 13. Nxh4 Bxh4 14.
+Be3 Bf5 15. Nd4 Bh7 16. g4 Be7 17. Kg2 h5 18. Nf5 Bf8 19. Kf3 Bg6 20. Rd2 hxg4+
+21. hxg4 Rh3+ 22. Kg2 Rh7 23. Kg3 f6 24. Bf4 Bxf5 25. gxf5 fxe5 26. Re1 Bd6 27.
+Bxe5 Kd7 28. c4 c5 29. Bxd6 cxd6 30. Re6 Rah8 31. Rexd6+ Kc8 32. R2d5 Rh3+ 33.
+Kg2 Rh2+ 34. Kf3 R2h3+ 35. Ke4 b6 36. Rc6+ Kb8 37. Rd7 Rh2 38. Ke3 Rf8 39. Rcc7
+Rxf5 40. Rb7+ Kc8 41. Rdc7+ Kd8 42. Rxg7 Kc8 1-0
+
+[Id "carlsen-ernst"]
+[Name "Carlsen at 13"]
+[White "Magnus Carlsen"]
+[Black "Sipke Ernst"]
+[Event "Corus Group C, Wijk aan Zee"]
+[Date "2004"]
+[Result "1-0"]
+[Source "https://dailychessmusings.com/2020/09/27/a-magnus-opuss/"]
+[Blurb "Carlsen, aged 13, sacrifices a knight, a bishop and a rook against Ernst's Caro-Kann and mates on move 29. He won the C group that year and earned his first grandmaster norm."]
+
+1. e4 c6 2. d4 d5 3. Nc3 dxe4 4. Nxe4 Bf5 5. Ng3 Bg6 6. h4 h6 7. Nf3 Nd7 8. h5
+Bh7 9. Bd3 Bxd3 10. Qxd3 e6 11. Bf4 Ngf6 12. O-O-O Be7 13. Ne4 Qa5 14. Kb1 O-O
+15. Nxf6+ Nxf6 16. Ne5 Rad8 17. Qe2 c5 18. Ng6 fxg6 19. Qxe6+ Kh8 20. hxg6 Ng8
+21. Bxh6 gxh6 22. Rxh6+ Nxh6 23. Qxe7 Nf7 24. gxf7 Kg7 25. Rd3 Rd6 26. Rg3+ Rg6
+27. Qe5+ Kxf7 28. Qf5+ Rf6 29. Qd7# 1-0
+
+[Id "aronian-anand"]
+[Name "Anand's Immortal"]
+[White "Levon Aronian"]
+[Black "Viswanathan Anand"]
+[Event "Tata Steel, Wijk aan Zee"]
+[Date "2013"]
+[Result "0-1"]
+[Source "https://en.wikipedia.org/wiki/Anand%27s_Immortal"]
+[Blurb "Aronian's knight grabs a pawn on h7, and Anand answers with a stream of sacrifices led by 16...Nde5!!. Aronian resigned after 23...Be3. Counted among Anand's greatest games."]
+
+1. d4 d5 2. c4 c6 3. Nf3 Nf6 4. Nc3 e6 5. e3 Nbd7 6. Bd3 dxc4 7. Bxc4 b5 8. Bd3
+Bd6 9. O-O O-O 10. Qc2 Bb7 11. a3 Rc8 12. Ng5 c5 13. Nxh7 Ng4 14. f4 cxd4 15.
+exd4 Bc5 16. Be2 Nde5 17. Bxg4 Bxd4+ 18. Kh1 Nxg4 19. Nxf8 f5 20. Ng6 Qf6 21.
+h3 Qxg6 22. Qe2 Qh5 23. Qd3 Be3 0-1
+
+[Id "carlsen-karjakin"]
+[Name "50.Qh6+!!"]
+[White "Magnus Carlsen"]
+[Black "Sergey Karjakin"]
+[Event "World Championship, New York, rapid tiebreak game 4"]
+[Date "2016"]
+[Result "1-0"]
+[Source "https://en.wikipedia.org/wiki/World_Chess_Championship_2016"]
+[Blurb "The classical games ended 6-6, so the title went to rapid tiebreaks. Carlsen won the last one with the queen sacrifice 50.Qh6+, which forces mate, and kept his title on his 26th birthday."]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. f3 e5 6. Nb3 Be7 7. c4 a5 8. Be3
+a4 9. Nc1 O-O 10. Nc3 Qa5 11. Qd2 Na6 12. Be2 Nc5 13. O-O Bd7 14. Rb1 Rfc8 15.
+b4 axb3 16. axb3 Qd8 17. Nd3 Ne6 18. Nb4 Bc6 19. Rfd1 h5 20. Bf1 h4 21. Qf2 Nd7
+22. g3 Ra3 23. Bh3 Rca8 24. Nc2 R3a6 25. Nb4 Ra5 26. Nc2 b6 27. Rd2 Qc7 28.
+Rbd1 Bf8 29. gxh4 Nf4 30. Bxf4 exf4 31. Bxd7 Qxd7 32. Nb4 Ra3 33. Nxc6 Qxc6 34.
+Nb5 Rxb3 35. Nd4 Qxc4 36. Nxb3 Qxb3 37. Qe2 Be7 38. Kg2 Qe6 39. h5 Ra3 40. Rd3
+Ra2 41. R3d2 Ra3 42. Rd3 Ra7 43. Rd5 Rc7 44. Qd2 Qf6 45. Rf5 Qh4 46. Rc1 Ra7
+47. Qxf4 Ra2+ 48. Kh1 Qf2 49. Rc8+ Kh7 50. Qh6+ 1-0
+
+[Id "ding-gukesh"]
+[Name "Gukesh becomes champion"]
+[White "Ding Liren"]
+[Black "Gukesh Dommaraju"]
+[Event "World Championship, Singapore, game 14"]
+[Date "2024"]
+[Result "0-1"]
+[Source "https://en.wikipedia.org/wiki/World_Chess_Championship_2024"]
+[Blurb "The match was level going into the last classical game. Ding blundered with 55.Rf2 in a level ending, and Gukesh won the match 7.5-6.5 to become the youngest undisputed world champion, at 18."]
+
+1. Nf3 d5 2. g3 c5 3. Bg2 Nc6 4. d4 e6 5. O-O cxd4 6. Nxd4 Nge7 7. c4 Nxd4 8.
+Qxd4 Nc6 9. Qd1 d4 10. e3 Bc5 11. exd4 Bxd4 12. Nc3 O-O 13. Nb5 Bb6 14. b3 a6
+15. Nc3 Bd4 16. Bb2 e5 17. Qd2 Be6 18. Nd5 b5 19. cxb5 axb5 20. Nf4 exf4 21.
+Bxc6 Bxb2 22. Qxb2 Rb8 23. Rfd1 Qb6 24. Bf3 fxg3 25. hxg3 b4 26. a4 bxa3 27.
+Rxa3 g6 28. Qd4 Qb5 29. b4 Qxb4 30. Qxb4 Rxb4 31. Ra8 Rxa8 32. Bxa8 g5 33. Bd5
+Bf5 34. Rc1 Kg7 35. Rc7 Bg6 36. Rc4 Rb1+ 37. Kg2 Re1 38. Rb4 h5 39. Ra4 Re5 40.
+Bf3 Kh6 41. Kg1 Re6 42. Rc4 g4 43. Bd5 Rd6 44. Bb7 Kg5 45. f3 f5 46. fxg4 hxg4
+47. Rb4 Bf7 48. Kf2 Rd2+ 49. Kg1 Kf6 50. Rb6+ Kg5 51. Rb4 Be6 52. Ra4 Rb2 53.
+Ba8 Kf6 54. Rf4 Ke5 55. Rf2 Rxf2 56. Kxf2 Bd5 57. Bxd5 Kxd5 58. Ke3 Ke5 0-1

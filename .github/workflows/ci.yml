@@ -16,12 +16,16 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Chess logic and puzzle set
+      - name: Chess logic, rating and every bundled game
         run: node --experimental-strip-types --test tests/*.spec.ts
-      - name: Puzzles checked with python-chess and Stockfish
+      - name: Famous games built from scripts/famous.pgn
+        run: |
+          pip install chess==1.10.0
+          python3 scripts/build_famous.py scripts/famous.pgn > "$RUNNER_TEMP/famous.ts"
+          diff -u hooks/famous.ts "$RUNNER_TEMP/famous.ts"
+      - name: Master-game puzzles checked with python-chess and Stockfish
         run: |
           sudo apt-get install -y stockfish
-          pip install chess==1.10.0
           export STOCKFISH=/usr/games/stockfish
-          node --experimental-strip-types -e "import('./hooks/puzzles.ts').then(m => console.log(JSON.stringify(m.PUZZLES)))" \
-            | python3 scripts/check_puzzles.py
+          node --experimental-strip-types -e "import('./hooks/masters.ts').then(m => console.log(JSON.stringify(m.MASTERS)))" \
+            | python3 scripts/check_masters.py
